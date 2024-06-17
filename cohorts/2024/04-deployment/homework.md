@@ -1,9 +1,8 @@
 ## Homework
 
-In this homework, we'll deploy the ride duration model in batch mode. Like in homework 1, we'll use the Yellow Taxi Trip Records dataset. 
+In this homework, we'll deploy the ride duration model in batch mode. Like in homework 1, we'll use the Yellow Taxi Trip Records dataset.
 
 You'll find the starter code in the [homework](homework) directory.
-
 
 ## Q1. Notebook
 
@@ -14,15 +13,14 @@ Run this notebook for the March 2023 data.
 
 What's the standard deviation of the predicted duration for this dataset?
 
-* 1.24
-* 6.24
-* 12.28
-* 18.28
-
+- 1.24
+- 6.24 <-- Correct Answer
+- 12.28
+- 18.28
 
 ## Q2. Preparing the output
 
-Like in the course videos, we want to prepare the dataframe with the output. 
+Like in the course videos, we want to prepare the dataframe with the output.
 
 First, let's create an artificial `ride_id` column:
 
@@ -30,7 +28,7 @@ First, let's create an artificial `ride_id` column:
 df['ride_id'] = f'{year:04d}/{month:02d}_' + df.index.astype('str')
 ```
 
-Next, write the ride id and the predictions to a dataframe with results. 
+Next, write the ride id and the predictions to a dataframe with results.
 
 Save it as parquet:
 
@@ -45,21 +43,21 @@ df_result.to_parquet(
 
 What's the size of the output file?
 
-* 36M
-* 46M
-* 56M
-* 66M
+- 36M
+- 46M
+- 56M
+- 66M <-- Correct Answer
 
-__Note:__ Make sure you use the snippet above for saving the file. It should contain only these two columns. For this question, don't change the
-dtypes of the columns and use `pyarrow`, not `fastparquet`. 
-
+**Note:** Make sure you use the snippet above for saving the file. It should contain only these two columns. For this question, don't change the
+dtypes of the columns and use `pyarrow`, not `fastparquet`.
 
 ## Q3. Creating the scoring script
 
-Now let's turn the notebook into a script. 
+Now let's turn the notebook into a script.
 
 Which command you need to execute for that?
 
+Answer: jupyter nbconvert --to script starter.ipynb
 
 ## Q4. Virtual environment
 
@@ -74,30 +72,31 @@ dependencies we use for the virtual env.
 
 What's the first hash for the Scikit-Learn dependency?
 
+Answer: "sha256:057b991ac64b3e75c9c04b5f9395eaf19a6179244c089afdebaad98264bff37c"
 
 ## Q5. Parametrize the script
 
-Let's now make the script configurable via CLI. We'll create two 
+Let's now make the script configurable via CLI. We'll create two
 parameters: year and month.
 
-Run the script for April 2023. 
+Run the script for April 2023.
 
-What's the mean predicted duration? 
+What's the mean predicted duration?
 
-* 7.29
-* 14.29
-* 21.29
-* 28.29
+- 7.29
+- 14.29 <-- Correct Answer
+- 21.29
+- 28.29
 
 Hint: just add a print statement to your script.
 
+## Q6. Docker container
 
-## Q6. Docker container 
-
-Finally, we'll package the script in the docker container. 
-For that, you'll need to use a base image that we prepared. 
+Finally, we'll package the script in the docker container.
+For that, you'll need to use a base image that we prepared.
 
 This is what the content of this image is:
+
 ```
 FROM python:3.10.13-slim
 
@@ -122,32 +121,30 @@ This image already has a pickle file with a dictionary vectorizer
 and a model. You will need to use them.
 
 Important: don't copy the model to the docker image. You will need
-to use the pickle file already in the image. 
+to use the pickle file already in the image.
 
 Now run the script with docker. What's the mean predicted duration
-for May 2023? 
+for May 2023?
 
-* 0.19
-* 7.24
-* 14.24
-* 21.19
-
+- 0.19 <-- Correct Answer
+- 7.24
+- 14.24
+- 21.19
 
 ## Bonus: upload the result to the cloud (Not graded)
 
-Just printing the mean duration inside the docker image 
-doesn't seem very practical. Typically, after creating the output 
+Just printing the mean duration inside the docker image
+doesn't seem very practical. Typically, after creating the output
 file, we upload it to the cloud storage.
 
 Modify your code to upload the parquet file to S3/GCS/etc.
-
 
 ## Bonus: Use Mage for batch inference
 
 Here we didn't use any orchestration. In practice we usually do.
 
-* Split the code into logical code blocks
-* Use Mage to orchestrate the execution
+- Split the code into logical code blocks
+- Use Mage to orchestrate the execution
 
 ## Publishing the image to dockerhub
 
@@ -163,8 +160,7 @@ docker push agrigorev/zoomcamp-model:mlops-2024-3.10.13-slim
 
 This is just for your reference, you don't need to do it.
 
-
 ## Submit the results
 
-* Submit your results here: https://courses.datatalks.club/mlops-zoomcamp-2024/homework/hw4
-* It's possible that your answers won't match exactly. If it's the case, select the closest one.
+- Submit your results here: https://courses.datatalks.club/mlops-zoomcamp-2024/homework/hw4
+- It's possible that your answers won't match exactly. If it's the case, select the closest one.
